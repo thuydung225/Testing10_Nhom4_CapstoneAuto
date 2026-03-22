@@ -54,7 +54,5 @@ public class Booking01_Verify_Unauthorized_Access extends BaseTest {
         CommonDialog dialog = new CommonDialog(driver);
         String recordedLoginMsg = dialog.getTextMessage();
         Assert.assertEquals(recordedLoginMsg, "Vui lòng đăng nhập để đặt lịch khám.", "Incorrect register message!");
-
-        Thread.sleep(3000);
     }
 }
