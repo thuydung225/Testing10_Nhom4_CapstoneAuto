@@ -3,17 +3,17 @@
 <suite name="Failed suite [Gradle suite]" verbose="0">
   <test thread-count="5" name="Gradle test(failed)" verbose="0">
     <classes>
-      <class name="testcase.booking.Booking04_Verify_Booking_Button_Disable_EmptyFields">
+      <class name="testcase.register.Register03_Register_With_Existed_Email">
         <methods>
-          <include name="afterMethod"/>
           <include name="setup"/>
+          <include name="afterMethod"/>
           <include name="teardown"/>
           <include name="beforeSuite"/>
           <include name="afterSuite"/>
           <include name="beforeMethod"/>
-          <include name="Booking04_Booking_Button_Disable_Empty_Fileds"/>
+          <include name="RG_076_EmailAlreadyExists"/>
         </methods>
-      </class> <!-- testcase.booking.Booking04_Verify_Booking_Button_Disable_EmptyFields -->
+      </class> <!-- testcase.register.Register03_Register_With_Existed_Email -->
     </classes>
   </test> <!-- Gradle test(failed) -->
 </suite> <!-- Failed suite [Gradle suite] -->
