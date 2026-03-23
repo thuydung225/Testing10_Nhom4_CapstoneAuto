@@ -11,7 +11,7 @@ import pages.LoginPage;
 import pages.dialog.CommonDialog;
 import report.ExtentReportManager;
 
-public class Login3_Login_With_Incomplete_Data extends BaseTest {
+public class Login03_Login_With_Incomplete_Data extends BaseTest {
 
     @Test(
             dataProvider = "loginIncompleteData",
