@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import pages.BookingPage;
 import pages.HomePage;
 import pages.LoginPage;
+import pages.dialog.CommonDialog;
 import report.ExtentReportManager;
 
 import java.time.Duration;
@@ -41,7 +42,7 @@ public class Booking04_Verify_Booking_Button_Disable_EmptyFields extends BaseTes
         //Step 2: Click 'Đăng nhập' link on the top right
         LOG.info("Step 2: Click 'Đăng nhập' link on the top right");
         ExtentReportManager.info("Step 2: Click 'Đăng nhập' link on the top right");
-        homePage.getNavigationBar().navigateLoginPage();
+        homePage.getTopBarNavigation().navigateLoginPage();
 
         //Step 3: Enter account
         //Step 4: Enter password
@@ -54,15 +55,25 @@ public class Booking04_Verify_Booking_Button_Disable_EmptyFields extends BaseTes
         ExtentReportManager.info("Step 5: Click 'Dang Nhap' button");
         loginPage.login(account, password);
 
-        //Step 6: Click 'Đặt lịch khám' link on the top
-        LOG.info("Step 6: Click 'Đặt lịch khám' link on the top");
-        ExtentReportManager.info("Step 6: Click 'Đặt lịch khám' link on the top");
-        homePage.getNavigationBar().navigateBookingPage();
+        //Step 6: Verify user login successfully
+        //VP1: Check 'Đăng nhập thành công' message display
+        LOG.info("Step: 6 Verify user login successfully");
+        LOG.info("VP1: Check 'Đăng nhập thành công' message display");
+        ExtentReportManager.info("Step 6: Verify user login successfully");
+        ExtentReportManager.info("VP1: Check 'Đăng nhập thành công' message display");
+        CommonDialog dialog = new CommonDialog(driver);
+        String recordedLoginSuccessMsg = dialog.getLoginTextMessage();
+        Assert.assertEquals(recordedLoginSuccessMsg, "Đăng nhập thành công", "Incorrect login message !");
 
-        //Step 7: Verify booking button is disable
-        //VP: Check booking button is diable
-        LOG.info("Step 7: Verify booking button is disable");
-        ExtentReportManager.info("VP: Verify booking button is disable");
+        //Step 7: Click 'Đặt lịch khám' link on the top
+        LOG.info("Step 6: Click 'Đặt lịch khám' link on the top");
+        ExtentReportManager.info("Step 7: Click 'Đặt lịch khám' link on the top");
+        homePage.getTopBarNavigation().navigateBookingPage();
+
+        //Step 8: Verify booking button is disable
+        //VP2: Check booking button is diable
+        LOG.info("Step 8: Verify booking button is disable");
+        ExtentReportManager.info("VP2: Verify booking button is disable");
         Assert.assertFalse(bookingPage.isBookingButtonEnabled(),"Booking button is enable");
     }
 }

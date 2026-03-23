@@ -10,6 +10,7 @@ public class LoginPage extends CommonPage{
     private By byTxtAccount = By.xpath("//input[@placeholder='Tên đăng nhập *']");
     private By byTxtPassword = By.xpath("//input[@placeholder='Mật khẩu *']");
     private By byBtnLogin = By.xpath("//button[contains(text(),'Đăng nhập')]");
+    private By byLnkForgotPassword = By.xpath("//a[@href='/forgot-password']");
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -30,7 +31,6 @@ public class LoginPage extends CommonPage{
     public void login(String username, String password) {
         enterAccount(username);
         enterPassword(password);
-        scrollToView(byBtnLogin);
         clickLogin();
     }
 
@@ -42,4 +42,24 @@ public class LoginPage extends CommonPage{
             return false;
         }
     }
+
+    public boolean loginAndCheckSuccess(String username, String password) {
+        login(username, password);
+        return getTopBarNavigation().isUserLoggedIn();
+    }
+
+    public void clickForgotPassword(){
+        click(byLnkForgotPassword);
+    }
+
+    public String getPasswordValidationMessage(){
+        return driver.findElement(byTxtPassword)
+                .getAttribute("validationMessage");
+    }
+    public String getUsernameValidationMessage(){
+        return driver.findElement(byTxtAccount)
+                .getAttribute("validationMessage");
+
+    }
+
 }

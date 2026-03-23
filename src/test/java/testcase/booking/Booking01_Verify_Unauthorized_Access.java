@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.BookingPage;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.dialog.CommonDialog;
@@ -38,7 +37,7 @@ public class Booking01_Verify_Unauthorized_Access extends BaseTest {
         //Step 2: Click 'Đặt lịch khám' link on the top
         LOG.info("Step 2: Click 'Đặt lịch khám' link on the top");
         ExtentReportManager.info("Step 2: Click 'Đặt lịch khám' link on the top");
-        homePage.getNavigationBar().navigateBookingPage();
+        homePage.getTopBarNavigation().navigateBookingPage();
 
         //Step 3: Verify user is redirected to Login Page
         //VP1: Check user is redirected to Login Page
@@ -52,7 +51,7 @@ public class Booking01_Verify_Unauthorized_Access extends BaseTest {
         LOG.info("VP2: Check 'Vui lòng đăng nhập để đặt lịch khám.' message display");
         ExtentReportManager.info("VP2: Check 'Vui lòng đăng nhập để đặt lịch khám.' message display");
         CommonDialog dialog = new CommonDialog(driver);
-        String recordedLoginMsg = dialog.getTextMessage();
+        String recordedLoginMsg = dialog.getTextRequestLoginMessage();
         Assert.assertEquals(recordedLoginMsg, "Vui lòng đăng nhập để đặt lịch khám.", "Incorrect register message!");
     }
 }

@@ -1,10 +1,7 @@
 package base;
 
 import constants.WaitTimeOut;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,6 +15,7 @@ public class BasePage {
     public BasePage(WebDriver driver) {
         this.driver = driver;
     }
+    private By toastContainer  = By.xpath("//div[contains(@class,'toast')]");
 
     public WebElement waitForVisibilityOfElementLocated(By locator, long timeOutInSec){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOutInSec));
@@ -66,6 +64,30 @@ public class BasePage {
 
     }
 
+    public void pause(long millis){
+        try{
+            Thread.sleep(millis);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * If isDisplayed is false, action will not wait for visibility
+     * Else action will wait for element is presented in DOM before clicking
+     * @param locator
+     * @param isDisplayed
+     * @param timeOutInSec
+     */
+    public void click(By locator, boolean isDisplayed, long timeOutInSec) {
+        if(isDisplayed) {
+            click(locator, timeOutInSec);
+        } else {
+            WebElement element = waitForPresenceOfElementLocated(locator, timeOutInSec);
+            element.click();
+        }
+    }
+
     public void click(By locator){
         click(locator, WaitTimeOut.DEFAULT_TIMEOUT);
     }
@@ -82,8 +104,14 @@ public class BasePage {
 
     public void selectDropdownByText(By locator, String text, long timeOutInSec){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOutInSec));
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        Select select = new Select(element);
+        wait.until(driver -> {
+            WebElement element = driver.findElement(locator);
+            Select select = new Select(element);
+            return select.getOptions().stream()
+                    .anyMatch(option -> option.getAttribute("value").equals(text));
+        });
+
+        Select select = new Select(driver.findElement(locator));
         select.selectByVisibleText(text);
     }
 
@@ -93,8 +121,14 @@ public class BasePage {
 
     public void selectDropdownByValue(By locator, String value, long timeOutInSec){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOutInSec));
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        Select select = new Select(element);
+        wait.until(driver -> {
+            WebElement element = driver.findElement(locator);
+            Select select = new Select(element);
+            return select.getOptions().stream()
+                    .anyMatch(option -> option.getAttribute("value").equals(value));
+        });
+
+        Select select = new Select(driver.findElement(locator));
         select.selectByValue(value);
     }
 
@@ -113,14 +147,54 @@ public class BasePage {
     }
 
     public void scrollToElement(By locator) {
-        WebElement element = driver.findElement(locator);
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true);", element);
+        WebElement element = waitForPresenceOfElementLocated(locator, 10);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
     public void scrollToView(By locator) {
-        WebElement element = driver.findElement(locator);
+        WebElement element = waitForPresenceOfElementLocated(locator, 10);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView({block: 'center'});",element);
+    }
+
+    public void waitForToastDisappear() {
+        try {
+            waitForInvisibilityOfElementLocated(toastContainer, 10);
+        } catch (Exception e) {
+            // ignore
+        }
+    }
+
+    public void clearAndSendKeys(By locator, String value) {
+        driver.findElement(locator).clear();
+        driver.findElement(locator).sendKeys(value);
+    }
+    public void disableHtml5Validation() {
+        ((org.openqa.selenium.JavascriptExecutor) driver)
+                .executeScript("document.querySelector('form').setAttribute('novalidate', 'true');");
+    }
+
+    public boolean isElementDisplayed(By locator, long timeOutInSec) {
+        try {
+            WebElement element = waitForVisibilityOfElementLocated(locator, timeOutInSec);
+            return element.isDisplayed();
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
+
+    public boolean isElementDisplayed(By locator) {
+        return isElementDisplayed(locator, WaitTimeOut.DEFAULT_TIMEOUT);
+    }
+
+    public void waitForPageStable() {
+        waitForToastDisappear();
+    }
+
+    public String getValidationMessage(By locator) {
+        WebElement element =
+                waitForVisibilityOfElementLocated(locator, 10);
+
+        return element.getAttribute("validationMessage");
     }
 }

@@ -2,18 +2,18 @@ package pages;
 
 import base.BasePage;
 import org.openqa.selenium.WebDriver;
-import pages.components.NavigationBar;
+import pages.components.TopBarNavigation;
 
 public class CommonPage extends BasePage {
 
-    private NavigationBar navigationBar;
+    private TopBarNavigation topBarNavigation;
 
     public CommonPage(WebDriver driver) {
         super(driver);
-        this.navigationBar = new NavigationBar(driver);
+        this.topBarNavigation = new TopBarNavigation(driver);
     }
 
-    public NavigationBar getNavigationBar() {
-        return this.navigationBar;
+    public TopBarNavigation getTopBarNavigation() {
+        return this.topBarNavigation;
     }
 }
