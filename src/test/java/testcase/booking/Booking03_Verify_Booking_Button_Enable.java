@@ -1,6 +1,7 @@
 package testcase.booking;
 
 import base.BaseTest;
+import constants.constantsURL;
 import drivers.DriverFactory;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
@@ -33,12 +34,7 @@ public class Booking03_Verify_Booking_Button_Enable extends BaseTest {
         //Step 1: Go to https://demo6.cybersoft.edu.vn/
         LOG.info("Step 1: Go to https://demo6.cybersoft.edu.vn/");
         ExtentReportManager.info("Step 1: Go to https://demo6.cybersoft.edu.vn/");
-        driver.get("https://demo6.cybersoft.edu.vn/");
-
-        Wait<WebDriver> wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(10))
-                .pollingEvery(Duration.ofMillis(500))
-                .ignoring(NotFoundException.class);
+        driver.get(constantsURL.BASE_URL);
 
         //Step 2: Click 'Đăng nhập' link on the top right
         LOG.info("Step 2: Click 'Đăng nhập' link on the top right");

@@ -52,6 +52,7 @@ public class BaseTest {
         WebDriver driver = DriverFactory.getDriver();
         if (driver != null) {
             driver.quit();
+            DriverFactory.removeDriver();
         }
     }
 

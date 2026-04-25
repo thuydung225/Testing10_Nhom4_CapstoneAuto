@@ -1,6 +1,7 @@
 package testcase.login;
 
 import base.BaseTest;
+import constants.constantsURL;
 import drivers.DriverFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -37,7 +38,7 @@ public class Login03_Login_With_Incomplete_Data extends BaseTest {
         // Step 1: Open website
         LOG.info("Step 1: Open website");
         ExtentReportManager.info("Step 1: Open website");
-        driver.get("https://demo6.cybersoft.edu.vn/");
+        driver.get(constantsURL.BASE_URL);
 
         // Step 2: Navigate Login page
         LOG.info("Step 2: Navigate Login page");

@@ -3,17 +3,17 @@
 <suite name="Failed suite [Gradle suite]" verbose="0">
   <test thread-count="5" name="Gradle test(failed)" verbose="0">
     <classes>
-      <class name="testcase.register.Register03_Register_With_Existed_Email">
+      <class name="testcase.profile.Profile01_Open_ProfilePage">
         <methods>
-          <include name="setup"/>
           <include name="afterMethod"/>
+          <include name="setup"/>
+          <include name="Profile01_Open_ProfilePage"/>
           <include name="teardown"/>
           <include name="beforeSuite"/>
           <include name="afterSuite"/>
           <include name="beforeMethod"/>
-          <include name="RG_076_EmailAlreadyExists"/>
         </methods>
-      </class> <!-- testcase.register.Register03_Register_With_Existed_Email -->
+      </class> <!-- testcase.profile.Profile01_Open_ProfilePage -->
     </classes>
   </test> <!-- Gradle test(failed) -->
 </suite> <!-- Failed suite [Gradle suite] -->
