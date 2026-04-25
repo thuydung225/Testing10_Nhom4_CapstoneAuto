@@ -1,6 +1,7 @@
 package testcase.profile;
 
 import base.BaseTest;
+import constants.constantsURL;
 import drivers.DriverFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -33,7 +34,7 @@ public class Profile03_Change_Password_InvalidCases extends BaseTest {
             LOG.info("Step: Back to homepage");
             ExtentReportManager.info("Step: Back to homepage");
 
-            driver.get("https://demo6.cybersoft.edu.vn/");
+            driver.get(constantsURL.BASE_URL);
 
             if (homePage.getTopBarNavigation().isUserLoggedIn()) {
                 LOG.info("Step: Logout after test");
@@ -130,7 +131,7 @@ public class Profile03_Change_Password_InvalidCases extends BaseTest {
 
         LOG.info("Ensure correct password for login");
 
-        driver.get("https://demo6.cybersoft.edu.vn/");
+        driver.get(constantsURL.BASE_URL);
 
         // check login
         if (homePage.getTopBarNavigation().isUserLoggedIn()) {
@@ -158,7 +159,7 @@ public class Profile03_Change_Password_InvalidCases extends BaseTest {
         LOG.info("Step: Try login with NEW password");
         ExtentReportManager.info("Step: Try login with NEW password");
 
-        driver.get("https://demo6.cybersoft.edu.vn/");
+        driver.get(constantsURL.BASE_URL);
         homePage.getTopBarNavigation().navigateLoginPage();
 
         if (loginPage.loginAndCheckSuccess(account, NEW_PASSWORD)) {

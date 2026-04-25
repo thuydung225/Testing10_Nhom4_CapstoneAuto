@@ -1,6 +1,7 @@
 package testcase.profile;
 
 import base.BaseTest;
+import constants.constantsURL;
 import drivers.DriverFactory;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -84,7 +85,7 @@ public class Profile02_Change_Password extends BaseTest {
 
         LOG.info("Ensure correct password for login");
 
-        driver.get("https://demo6.cybersoft.edu.vn/");
+        driver.get(constantsURL.BASE_URL);
         homePage.getTopBarNavigation().navigateLoginPage();
 
         // ===== TRY DEFAULT =====

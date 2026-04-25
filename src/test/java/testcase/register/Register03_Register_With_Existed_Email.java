@@ -1,6 +1,7 @@
 package testcase.register;
 
 import base.BaseTest;
+import constants.constantsURL;
 import drivers.DriverFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -20,7 +21,7 @@ public class Register03_Register_With_Existed_Email extends BaseTest {
         //Step 1: go to https://demo1.cybersoft.edu.vn/
         LOG.info("Step 1: Go to https://demo6.cybersoft.edu.vn/");
         ExtentReportManager.info("Step 1: Go to https://demo6.cybersoft.edu.vn/");
-        driver.get("https://demo6.cybersoft.edu.vn/");
+        driver.get(constantsURL.BASE_URL);
 
         //Step 2: Navigate Register page
         LOG.info("Step 2: Navigate Register page");

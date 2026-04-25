@@ -1,6 +1,7 @@
 package testcase.forgotpassword;
 
 import base.BaseTest;
+import constants.constantsURL;
 import drivers.DriverFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -38,7 +39,7 @@ public class ForgotPassword02_Send_Email_Invalid extends BaseTest {
         // ================= STEP 1 =================
         LOG.info("Step 1: Navigate to homepage");
         ExtentReportManager.info("Step 1: Navigate to homepage");
-        driver.get("https://demo6.cybersoft.edu.vn/");
+        driver.get(constantsURL.BASE_URL);
 
         // ================= STEP 2 =================
         LOG.info("Step 2: Navigate to Login page");
